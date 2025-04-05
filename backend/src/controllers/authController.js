@@ -350,6 +350,7 @@ export const locations = async (req, res) => {
 };
 
 export const addDevice = async (req, res) => {
+    
     const { deviceType, deviceName, userId } = req.body || null;
     /* For the case of recycling the device */
     const {

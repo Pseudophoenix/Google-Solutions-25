@@ -110,7 +110,7 @@ const Deviceinfo = () => {
         setUploading(false);
         return;
       }
-
+      console.log("///////");
       // Create a reference to the file location in Firebase Storage
       const localUri = imageUri;
       const filename = localUri.split('/').pop();
@@ -135,7 +135,7 @@ const Deviceinfo = () => {
 
       // Get device type from ML model
       const mlResponse = await axios.post(
-        'https://flaskapp-613599475137.asia-east2.run.app/',
+        'https://flaskapp-613599475137.us-central1.run.app/',
         formData,
         {
           headers: {
@@ -143,9 +143,12 @@ const Deviceinfo = () => {
           },
         }
       );
-
+      console.log("///////");
       if (!mlResponse.data || !mlResponse.data.predicted_class) {
         throw new Error('Device type not detected from the image');
+      }
+      else{
+        console.log(mlResponse.data.predicted_class.trim());
       }
 
       // Send device data to addDevice endpoint
@@ -156,6 +159,8 @@ const Deviceinfo = () => {
         organizationName: null,
         organizationId: null,
         description: null,
+        address:null,
+        pinCode:null,
         imei: null,
         modelNumber: null,
         purchaseYear: null,
